@@ -47,13 +47,14 @@ class UserController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
+        
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
 
         return back()->withErrors([
-            'password' => 'Wrong username or password',
+            'password' => 'Wrong username',
         ]);
     }
 
